@@ -1,11 +1,9 @@
 import Billboard from "../../components/Billboard";
-import NavBar from "../../components/Header";
 import ProductCard from "../../components/ProductCard";
 
 export default function index() {
   return (
     <div>
-      <NavBar />
       <Billboard />
       <section className="py-5">
         <div className="container px-4 px-lg-5 mt-5">
@@ -14,13 +12,6 @@ export default function index() {
           </div>
         </div>
       </section>
-      <footer className="py-5 bg-dark">
-        <div className="container">
-          <p className="m-0 text-center text-white">
-            Copyright &copy; Your Website 2023
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

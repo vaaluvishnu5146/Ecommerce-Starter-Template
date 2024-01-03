@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 export default function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
         <a className="navbar-brand" href="#!">
-          Start Bootstrap
+          Ecommerce
         </a>
         <button
           className="navbar-toggler"
@@ -19,9 +21,9 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#!">
+              <Link className="nav-link active" aria-current="page" to="/home">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#!">
@@ -61,7 +63,7 @@ export default function NavBar() {
               </ul>
             </li>
           </ul>
-          <form className="d-flex">
+          <Link to="/cart">
             <button className="btn btn-outline-dark" type="submit">
               <i className="bi-cart-fill me-1"></i>
               Cart
@@ -69,7 +71,7 @@ export default function NavBar() {
                 0
               </span>
             </button>
-          </form>
+          </Link>
         </div>
       </div>
     </nav>
