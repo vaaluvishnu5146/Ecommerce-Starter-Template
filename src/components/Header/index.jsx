@@ -1,16 +1,9 @@
-import { Link } from "react-router-dom";
-import { CartContext } from "../../Contexts/Cart.context";
-import { AuthContext } from "../../Contexts/Auth.context";
-import { useContext } from "react";
-
 export default function NavBar() {
-  const { cartItems = [] } = useContext(CartContext);
-  const { isLoggedIn } = useContext(AuthContext);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
         <a className="navbar-brand" href="#!">
-          ByOnline
+          Start Bootstrap
         </a>
         <button
           className="navbar-toggler"
@@ -26,13 +19,9 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li className="nav-item">
-              <Link
-                className="nav-link active"
-                aria-current="page"
-                to="/home/MensTees"
-              >
+              <a className="nav-link active" aria-current="page" href="#!">
                 Home
-              </Link>
+              </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#!">
@@ -52,48 +41,35 @@ export default function NavBar() {
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <Link
-                    className="nav-link active"
-                    aria-current="page"
-                    to="/home/mens"
-                  >
-                    Mens Collections
-                  </Link>
+                  <a className="dropdown-item" href="#!">
+                    All Products
+                  </a>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <Link
-                    className="nav-link active"
-                    aria-current="page"
-                    to="/home/womens"
-                  >
-                    Womens Collections
-                  </Link>
+                  <a className="dropdown-item" href="#!">
+                    Popular Items
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#!">
+                    New Arrivals
+                  </a>
                 </li>
               </ul>
             </li>
           </ul>
-          {isLoggedIn && (
-            <Link to="/cart">
-              <button className="btn btn-outline-dark" type="submit">
-                <i className="bi-cart-fill me-1"></i>
-                Cart
-                <span className="badge bg-dark text-white ms-1 rounded-pill">
-                  {cartItems.length}
-                </span>
-              </button>
-            </Link>
-          )}
-          {!isLoggedIn && (
-            <Link to="/">
-              <button className="btn btn-outline-dark" type="submit">
-                <i className="bi-cart-fill me-1"></i>
-                Login
-              </button>
-            </Link>
-          )}
+          <form className="d-flex">
+            <button className="btn btn-outline-dark" type="submit">
+              <i className="bi-cart-fill me-1"></i>
+              Cart
+              <span className="badge bg-dark text-white ms-1 rounded-pill">
+                0
+              </span>
+            </button>
+          </form>
         </div>
       </div>
     </nav>
