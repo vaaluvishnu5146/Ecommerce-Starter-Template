@@ -1,4 +1,12 @@
-export default function ProductCard() {
+export default function ProductCard({ data = {} }) {
+  function renderRatings(rating = 0) {
+    let ratingsNode = [];
+    for (let i = 0; i < rating; i++) {
+      ratingsNode.push(<div className="bi-star-fill"></div>);
+    }
+    return ratingsNode;
+  }
+
   return (
     <div className="col mb-5">
       <div className="card h-100">
@@ -9,26 +17,18 @@ export default function ProductCard() {
           Sale
         </div>
 
-        <img
-          className="card-img-top"
-          src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-          alt="..."
-        />
+        <img className="card-img-top" src={data.image} alt="..." />
 
         <div className="card-body p-4">
           <div className="text-center">
-            <h5 className="fw-bolder">Special Item</h5>
+            <h5 className="fw-bolder">{data.name}</h5>
             <div className="d-flex justify-content-center small text-warning mb-2">
-              <div className="bi-star-fill"></div>
-              <div className="bi-star-fill"></div>
-              <div className="bi-star-fill"></div>
-              <div className="bi-star-fill"></div>
-              <div className="bi-star-fill"></div>
+              {renderRatings(data.rating)}
             </div>
             <span className="text-muted text-decoration-line-through">
-              $20.00
+              ${data.normalCost}
             </span>
-            $18.00
+            ${data.actualCost}
           </div>
         </div>
 
