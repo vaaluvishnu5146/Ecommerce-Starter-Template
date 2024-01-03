@@ -10,5 +10,5 @@ Currently, two official plugins are available:
 
 - # USER INTERFACE
 
-- ![Ecommerce application ui](https://github.com/vaaluvishnu5146/Ecommerce-Starter-Template/assets/22257731/5e8e8836-afc2-4a3f-b729-6b8a2668edd3)
+![Ecommerce application ui](https://github.com/vaaluvishnu5146/Ecommerce-Starter-Template/assets/22257731/5e8e8836-afc2-4a3f-b729-6b8a2668edd3)
 
