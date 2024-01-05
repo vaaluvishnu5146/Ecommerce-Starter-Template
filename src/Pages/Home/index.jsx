@@ -16,7 +16,7 @@ export default function Home() {
 
   function handleAddToCart(data = {}) {
     let cartCopy = [...cartItems];
-    cartCopy.push(data);
+    cartCopy.push({ ...data, quantity: 1 });
     updateCart(cartCopy);
   }
 

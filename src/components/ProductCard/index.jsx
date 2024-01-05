@@ -1,6 +1,12 @@
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { CartContext } from "../../Contexts/Cart.context";
 
 export default function ProductCard({ data = {}, handleAddToCart = () => {} }) {
+  const { cartItems = [] } = useContext(CartContext);
+  const isDisabled =
+    cartItems.filter((item) => item.id === data.id).length > 0 ? true : false;
+
   function renderRatings(rating = 0) {
     let ratingsNode = [];
     for (let i = 0; i < rating; i++) {
@@ -42,8 +48,9 @@ export default function ProductCard({ data = {}, handleAddToCart = () => {} }) {
             <button
               className="btn btn-outline-dark mt-auto"
               onClick={() => handleAddToCart(data)}
+              disabled={isDisabled}
             >
-              Add to cart
+              {isDisabled ? "Added to cart" : "Add to cart"}
             </button>
           </div>
         </div>
