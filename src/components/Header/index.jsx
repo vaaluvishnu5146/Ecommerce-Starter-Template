@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { CartContext } from "../../Contexts/Cart.context";
+import { useContext } from "react";
 
 export default function NavBar() {
+  const { cartItems = [] } = useContext(CartContext);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
@@ -75,7 +78,7 @@ export default function NavBar() {
               <i className="bi-cart-fill me-1"></i>
               Cart
               <span className="badge bg-dark text-white ms-1 rounded-pill">
-                0
+                {cartItems.length}
               </span>
             </button>
           </Link>

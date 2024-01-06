@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Billboard from "../../components/Billboard";
 import ProductCard from "../../components/ProductCard";
+import { CartContext } from "../../Contexts/Cart.context";
 
 export default function Home() {
+  const { cartItems = [], updateCart = () => {} } = useContext(CartContext);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -12,6 +14,12 @@ export default function Home() {
       .catch((error) => console.log(error));
   }, []);
 
+  function handleAddToCart(data = {}) {
+    let cartCopy = [...cartItems];
+    cartCopy.push({ ...data, quantity: 1 });
+    updateCart(cartCopy);
+  }
+
   return (
     <div>
       <Billboard />
@@ -19,7 +27,11 @@ export default function Home() {
         <div className="container px-4 px-lg-5 mt-5">
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {products.map((data, index) => (
-              <ProductCard key={`${data.name}-${index}`} data={data} />
+              <ProductCard
+                key={`${data.name}-${index}`}
+                data={data}
+                handleAddToCart={handleAddToCart}
+              />
             ))}
           </div>
         </div>

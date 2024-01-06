@@ -1,0 +1,17 @@
+.cart-page-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  > .items-listing-container {
+    width: 60%;
+
+    > .listing-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  > .cart-calculator-container {
+    width: 40%;
+  }
+}

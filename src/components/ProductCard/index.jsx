@@ -1,4 +1,12 @@
-export default function ProductCard({ data = {} }) {
+import PropTypes from "prop-types";
+import { useContext } from "react";
+import { CartContext } from "../../Contexts/Cart.context";
+
+export default function ProductCard({ data = {}, handleAddToCart = () => {} }) {
+  const { cartItems = [] } = useContext(CartContext);
+  const isDisabled =
+    cartItems.filter((item) => item.id === data.id).length > 0 ? true : false;
+
   function renderRatings(rating = 0) {
     let ratingsNode = [];
     for (let i = 0; i < rating; i++) {
@@ -12,7 +20,10 @@ export default function ProductCard({ data = {} }) {
       <div className="card h-100">
         <div
           className="badge bg-dark text-white position-absolute"
-          style={{ top: "0.5rem", right: "0.5rem" }}
+          style={{
+            top: "0.5rem",
+            right: "0.5rem",
+          }}
         >
           Sale
         </div>
@@ -34,12 +45,21 @@ export default function ProductCard({ data = {} }) {
 
         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
           <div className="text-center">
-            <a className="btn btn-outline-dark mt-auto" href="#">
-              Add to cart
-            </a>
+            <button
+              className="btn btn-outline-dark mt-auto"
+              onClick={() => handleAddToCart(data)}
+              disabled={isDisabled}
+            >
+              {isDisabled ? "Added to cart" : "Add to cart"}
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+ProductCard.propTypes = {
+  data: PropTypes.object.isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
+};
