@@ -6,7 +6,7 @@ export default function NavBar() {
   const { cartItems = [] } = useContext(CartContext);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container px-4 px-lg-5">
+      <div className="container px-2 px-lg-2">
         <a className="navbar-brand" href="#!">
           ByOnline
         </a>
