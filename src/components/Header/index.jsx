@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { CartContext } from "../../Contexts/Cart.context";
+import { AuthContext } from "../../Contexts/Auth.context";
 import { useContext } from "react";
 
 export default function NavBar() {
   const { cartItems = [] } = useContext(CartContext);
+  const { isLoggedIn } = useContext(AuthContext);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
@@ -73,15 +75,25 @@ export default function NavBar() {
               </ul>
             </li>
           </ul>
-          <Link to="/cart">
-            <button className="btn btn-outline-dark" type="submit">
-              <i className="bi-cart-fill me-1"></i>
-              Cart
-              <span className="badge bg-dark text-white ms-1 rounded-pill">
-                {cartItems.length}
-              </span>
-            </button>
-          </Link>
+          {isLoggedIn && (
+            <Link to="/cart">
+              <button className="btn btn-outline-dark" type="submit">
+                <i className="bi-cart-fill me-1"></i>
+                Cart
+                <span className="badge bg-dark text-white ms-1 rounded-pill">
+                  {cartItems.length}
+                </span>
+              </button>
+            </Link>
+          )}
+          {!isLoggedIn && (
+            <Link to="/">
+              <button className="btn btn-outline-dark" type="submit">
+                <i className="bi-cart-fill me-1"></i>
+                Login
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </nav>

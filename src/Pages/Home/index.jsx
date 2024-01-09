@@ -2,15 +2,19 @@ import { useEffect, useState, useContext } from "react";
 import Billboard from "../../components/Billboard";
 import ProductCard from "../../components/ProductCard";
 import { CartContext } from "../../Contexts/Cart.context";
+import API from "../../axios/custom-interceptors";
 
 export default function Home() {
   const { cartItems = [], updateCart = () => {} } = useContext(CartContext);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5173/products.json")
-      .then((response) => response.json())
-      .then((result) => setProducts(result.data))
+    API.get("/products")
+      .then((response) => {
+        if (response.status === 200) {
+          setProducts(response.data.data);
+        }
+      })
       .catch((error) => console.log(error));
   }, []);
 
