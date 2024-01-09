@@ -3,27 +3,21 @@ import { AuthContext } from "../../Contexts/Auth.context";
 import { setSessionStorageData } from "../../storage/sessionstorage";
 import "./style.css";
 import { useNavigate } from "react-router";
+import API from "../../axios/custom-interceptors";
 
 export default function Login() {
-  const { setLoggedIn, isLoggedIn } = useContext(AuthContext);
+  const { setLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   function handleLogin() {
-    fetch("http://localhost:5000/api/auth/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: "vishnu@test.com",
-        password: "password",
-      }),
+    API.post("/auth/signin", {
+      email: "vishnu@test.com",
+      password: "password",
     })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.success) {
+      .then((response) => {
+        if (response.status === 200) {
           setLoggedIn(true);
-          setSessionStorageData("_tk", result.token);
+          setSessionStorageData("_tk", response.data.token);
           navigate("/home/MensTees");
         }
       })

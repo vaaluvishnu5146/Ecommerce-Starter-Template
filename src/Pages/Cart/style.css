@@ -2,16 +2,30 @@
   display: flex;
   width: 100%;
   height: 100vh;
+  gap: 0 20px;
   > .items-listing-container {
-    width: 60%;
+    width: 75%;
 
     > .listing-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+
+    > .cart-items-listing {
+      display: flex;
+      gap: 20px 0px;
+      flex-direction: column;
+    }
   }
   > .cart-calculator-container {
-    width: 40%;
+    width: 25%;
+  }
+}
+
+.pricing-list {
+  > .item {
+    display: flex;
+    justify-content: space-between;
   }
 }

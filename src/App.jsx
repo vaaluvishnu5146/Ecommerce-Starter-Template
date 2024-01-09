@@ -10,7 +10,6 @@ import { Routes, Route } from "react-router-dom";
 import { AuthContext } from "./Contexts/Auth.context";
 import { useContext } from "react";
 import NotFound from "./Pages/NotFound";
-import LoginModal from "./Modals/LoginModal/LoginModal";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
