@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export default function NavBar() {
+export default function NavBar({ quantity = 0 }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
         <a className="navbar-brand" href="#!">
-          ByOnline
+          ZHA
         </a>
         <button
           className="navbar-toggler"
@@ -75,7 +76,7 @@ export default function NavBar() {
               <i className="bi-cart-fill me-1"></i>
               Cart
               <span className="badge bg-dark text-white ms-1 rounded-pill">
-                0
+                {quantity}
               </span>
             </button>
           </Link>
@@ -84,3 +85,7 @@ export default function NavBar() {
     </nav>
   );
 }
+
+NavBar.propTypes = {
+  quantity: PropTypes.number,
+};

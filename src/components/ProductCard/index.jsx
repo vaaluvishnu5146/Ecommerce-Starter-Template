@@ -1,4 +1,10 @@
-export default function ProductCard({ data = {} }) {
+import PropTypes from "prop-types";
+
+export default function ProductCard({
+  data = {},
+  handleAddToCart = () => {},
+  isAddedToCart = false,
+}) {
   function renderRatings(rating = 0) {
     let ratingsNode = [];
     for (let i = 0; i < rating; i++) {
@@ -8,7 +14,7 @@ export default function ProductCard({ data = {} }) {
   }
 
   return (
-    <div className="col mb-5">
+    <div className="col-md-3 mb-5">
       <div className="card h-100">
         <div
           className="badge bg-dark text-white position-absolute"
@@ -34,12 +40,21 @@ export default function ProductCard({ data = {} }) {
 
         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
           <div className="text-center">
-            <a className="btn btn-outline-dark mt-auto" href="#">
-              Add to cart
-            </a>
+            <button
+              className="btn btn-outline-dark mt-auto"
+              onClick={() => handleAddToCart(data)}
+            >
+              {isAddedToCart ? "Added to cart" : "Add to cart"}
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+ProductCard.propTypes = {
+  data: PropTypes.object,
+  handleAddToCart: PropTypes.func,
+  isAddedToCart: PropTypes.bool,
+};

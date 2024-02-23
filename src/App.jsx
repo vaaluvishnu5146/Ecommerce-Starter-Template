@@ -1,24 +1,41 @@
-import Home from "./Pages/Home/index";
+import { useState, useLayoutEffect } from "react";
 import "./App.css";
-import Login from "./Pages/Login";
-import Signup from "./Pages/Signup";
-import Cart from "./Pages/Cart";
-import ProductDetails from "./Pages/ProductDetails";
 import NavBar from "./components/Header";
 import Footer from "./components/Footer";
-import { Routes, Route } from "react-router-dom";
+import ProductsContainer from "./components/ProductsContainer/ProductsContainer";
+import Billboard from "./components/Billboard";
 
 function App() {
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  useLayoutEffect(() => {
+    fetch("http://localhost:5173/products.json")
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.data.length > 0) {
+          setProducts(result.data);
+        }
+      })
+      .catch((error) => console.log(error));
+    return () => {};
+  }, []);
+
+  function handleAddToCart(data = {}) {
+    let cartCopy = [...cart];
+    cartCopy.push(data);
+    setCart(cartCopy);
+  }
+
   return (
     <div>
-      <NavBar />
-      <Routes>
-        <Route Component={Home} path="/home/:id" />
-        <Route Component={Login} path="/" />
-        <Route Component={Signup} path="/signup" />
-        <Route Component={ProductDetails} path="/productdetails" />
-        <Route Component={Cart} path="/cart" />
-      </Routes>
+      <NavBar quantity={cart.length} />
+      <Billboard />
+      <ProductsContainer
+        products={products}
+        handleAddToCart={handleAddToCart}
+        cart={cart}
+      />
       <Footer />
     </div>
   );
